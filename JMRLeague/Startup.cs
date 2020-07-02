@@ -1,4 +1,3 @@
-using JMRLeague.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +22,6 @@ namespace JMRLeague
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddScoped<HttpClient>();
         }
 
