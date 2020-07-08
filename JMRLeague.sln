@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMRLeague", "JMRLeague\JMRLeague.csproj", "{7F3E47FB-DE0C-476D-9CAB-A7C55DBAB754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMRLeague", "JMRLeague\JMRLeague.csproj", "{7F3E47FB-DE0C-476D-9CAB-A7C55DBAB754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMRLeagueWASM.Server", "JMRLeagueWASM\Server\JMRLeagueWASM.Server.csproj", "{4A37F1CF-7189-4A00-8B44-3A81396F8C13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMRLeagueWASM.Server", "JMRLeagueWASM\Server\JMRLeagueWASM.Server.csproj", "{4A37F1CF-7189-4A00-8B44-3A81396F8C13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMRLeagueWASM.Client", "JMRLeagueWASM\Client\JMRLeagueWASM.Client.csproj", "{2FFED422-6DFF-48A2-BABA-4BCB6A101840}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMRLeagueWASM.Client", "JMRLeagueWASM\Client\JMRLeagueWASM.Client.csproj", "{2FFED422-6DFF-48A2-BABA-4BCB6A101840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMRLeague.Shared", "JMRLeagueWASM\Shared\JMRLeague.Shared.csproj", "{7F3E7EEB-EA84-4F3C-A39A-9E840F14B8A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMRLeague.Shared", "JMRLeagueWASM\Shared\JMRLeague.Shared.csproj", "{7F3E7EEB-EA84-4F3C-A39A-9E840F14B8A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

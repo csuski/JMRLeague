@@ -1,0 +1,23 @@
+﻿@page "/teams"
+@using JMRLeague.Shared
+@inject JMRLeague.Shared.Services.IMarbleTeamsService marbleTeamService
+@inject JMRLeague.Shared.Services.IMarbleEventsService marbleEventsService
+
+<StandingsComponent Title="Mable Team Standings" Standings="@Standings" />
+
+
+@code {
+    private Standings Standings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var teams = await marbleTeamService.GetTeams();
+        var events = await marbleEventsService.GetMarbleEvents();
+
+        Standings = new Standings
+        {
+            Teams = teams.Teams.Cast<ITeam>().ToList(),
+            EventsAndScores = events.Events.Cast<IEventScores>().ToList()
+        };
+    }
+}

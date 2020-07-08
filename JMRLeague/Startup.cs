@@ -1,3 +1,4 @@
+using JMRLeague.Shared.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,9 @@ namespace JMRLeague
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<HttpClient>();
+            // TODO: Transient? Scoped?
+            services.AddTransient<IMarbleTeamsService, HardCodedMarbleTeamsService>();
+            services.AddTransient<IMarbleEventsService, HardcodedMarbleEventsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
