@@ -1,5 +1,37 @@
 ﻿@page "/"
+@using JMRLeague.Shared
+@inject JMRLeague.Shared.Services.IPlayersService playerService
+@inject JMRLeague.Shared.Services.IMarbleEventsService eventsService
+@inject JMRLeague.Shared.Services.IDraftsService draftService
 
-<h1>Hello, world!</h1>
+<StandingsComponent Title="League Standings" Standings="@Standings" />
 
-Welcome to your new app.
+
+@code {
+    private Standings Standings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var players = await playerService.GetPlayers();
+        var drafts = await draftService.GetDrafts();
+        var eventList = await eventsService.GetMarbleEvents();
+
+
+        var scores = new List<PlayerScores>();
+        foreach(var e in eventList.Events)
+        {
+            var draft = drafts.DraftList.SingleOrDefault(d => d.EventId == e.Id);
+            if (draft == null) continue;
+            scores.Add(new PlayerScores(players, draft, e)
+            {
+                Name = e.Name, Id = e.Id
+            });
+        }
+
+        Standings = new Standings
+        {
+            Teams = players.PlayersList.Cast<ITeam>().ToList(),
+            EventsAndScores = scores.Cast<IEventScores>().ToList()
+        };
+    }
+}

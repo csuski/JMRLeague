@@ -2,8 +2,8 @@
 
 namespace JMRLeague.Shared.Services
 {
-    public interface ITeamsService
+    public interface IPlayersService
     {
-        Task<MarbleTeams> GetTeams();
+        Task<Players> GetPlayers();
     }
 }

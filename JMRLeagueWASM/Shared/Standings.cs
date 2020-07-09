@@ -6,7 +6,7 @@ namespace JMRLeague.Shared
     public class Standings
     {
         public List<ITeam> Teams { get; set; }
-        
+
         public List<IEventScores> EventsAndScores { get; set; }
 
         public int GetTotalPoints(int teamId) => EventsAndScores.Sum(e => e.GetScore(teamId));

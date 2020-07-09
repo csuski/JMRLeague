@@ -2,8 +2,8 @@
 
 namespace JMRLeague.Shared.Services
 {
-    public interface ITeamsService
+    public interface IDraftsService
     {
-        Task<MarbleTeams> GetTeams();
+        Task<Drafts> GetDrafts();
     }
 }
