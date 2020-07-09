@@ -71,7 +71,7 @@ namespace JMRLeague.Shared.Services
                    { 5, 6 },
                    { 6, 4 },
                    { 7, 1 },
-                   { 8, 52 },
+                   { 8, 5 },
                    { 9, 25 },
                    { 10, 20 },
                    { 11, 3 },

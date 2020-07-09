@@ -17,7 +17,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var team in Standings.Teams)
+            @foreach (var team in Standings.TeamsByTotal)
             {
                 <tr>
                     <td>@team.Name</td>
@@ -38,4 +38,5 @@ else
     public string Title { get; set; }
     [Parameter]
     public JMRLeague.Shared.Standings Standings { get; set; }
+
 }

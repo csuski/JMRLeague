@@ -7,6 +7,8 @@ namespace JMRLeague.Shared
     {
         public List<ITeam> Teams { get; set; }
 
+        public List<ITeam> TeamsByTotal => Teams.OrderByDescending(t => GetTotalPoints(t.Id)).ToList();
+
         public List<IEventScores> EventsAndScores { get; set; }
 
         public int GetTotalPoints(int teamId) => EventsAndScores.Sum(e => e.GetScore(teamId));

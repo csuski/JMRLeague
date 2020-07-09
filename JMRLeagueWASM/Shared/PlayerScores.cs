@@ -10,9 +10,9 @@ namespace JMRLeague.Shared
             foreach (var p in players.PlayersList)
             {
                 var total = 0;
-                foreach (var (_, teamId) in draft.DraftedTeams.Where(k => k.playerId == p.Id))
+                foreach (var pick in draft.DraftedTeams.Where(pick => pick.PlayerId == p.Id))
                 {
-                    total += marbleEvent.Scores[teamId];
+                    total += marbleEvent.Scores[pick.MarbleTeamId];
                 }
 
                 Scores.Add(p.Id, total);
