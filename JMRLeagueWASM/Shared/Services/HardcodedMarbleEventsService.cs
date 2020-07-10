@@ -81,6 +81,31 @@ namespace JMRLeague.Shared.Services
                    { 15, 0 },
                    { 16, 8 }
                },
+           },
+           new MarbleEvent {
+               Id = 4,
+               Date = new DateTime(2020, 7, 9),
+               EventNumber = 4,
+               Name = "Newton's Cradle",
+               URL="https://www.youtube.com/watch?v=QBdjOa5di1I",
+               Scores = new Dictionary<int, int> {
+                   { 1, 3 },
+                   { 2, 8 },
+                   { 3, 12 },
+                   { 4, 6 },
+                   { 5, 9 },
+                   { 6, 1 },
+                   { 7, 0 },
+                   { 8, 11 },
+                   { 9, 10 },
+                   { 10, 25 },
+                   { 11, 4 },
+                   { 12, 15 },
+                   { 13, 7 },
+                   { 14, 20 },
+                   { 15, 5 },
+                   { 16, 2 }
+               },
            }
         };
 

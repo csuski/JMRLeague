@@ -8,16 +8,26 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Team</th>
-                <th>Total Points</th>
+                <th>
+                    <span class="sort-link"
+                          @onclick='() => SortTable("Team")'>Team</span>
+                    <span class="fa @(GetSortStyle("Team"))"></span>
+                </th>
+                <th><span class="sort-link"
+                          @onclick='() => SortTable("Total")'>Total Points</span>
+                    <span class="fa @(GetSortStyle("Total"))"></span>
+                </th>
                 @foreach (var e in Standings.EventsAndScores)
                 {
-                    <th>@e.Name</th>
+                    <th><span class="sort-link"
+                              @onclick='() => SortTable(e.Id.ToString())'>@e.Name</span>
+                        <span class="fa @(GetSortStyle(e.Id.ToString()))"></span>
+                    </th>
                 }
             </tr>
         </thead>
         <tbody>
-            @foreach (var team in Standings.TeamsByTotal)
+            @foreach (var team in OrderedTeams)
             {
                 <tr>
                     <td>@team.Name</td>
@@ -34,9 +44,82 @@ else
 
 
 @code {
+
+    private JMRLeague.Shared.Standings _standings;
+
     [Parameter]
     public string Title { get; set; }
     [Parameter]
-    public JMRLeague.Shared.Standings Standings { get; set; }
+    public JMRLeague.Shared.Standings Standings
+    {
+        get => _standings;
+        set
+        {
+            _standings = value;
+            OrderedTeams = _standings.TeamsByTotal;
+            CurrentSortColumn = "Total";
+            IsSortedAscending = false;
+        }
+    }
+
+    public IList<JMRLeague.Shared.ITeam> OrderedTeams { get; private set; }
+
+
+    //https://exceptionnotfound.net/exploring-blazor-by-making-an-html-table-sortable-in-net-core/
+    private string CurrentSortColumn;
+    private bool IsSortedAscending;
+
+    private void SortTable(string columnName)
+    {
+        if (_standings == null) return;
+
+        if (columnName != CurrentSortColumn)
+        {
+            if(columnName == "Team")
+            {
+                IsSortedAscending = true;
+                OrderedTeams = _standings.Teams.OrderBy(t => t.Name).ToList();
+            }
+            else if(columnName == "Total")
+            {
+                IsSortedAscending = false;
+                OrderedTeams = _standings.TeamsByTotal;
+            }
+            else
+            {
+                IsSortedAscending = false;
+                if (!Int32.TryParse(columnName, out var eventId)) return;
+                var eventScores = _standings.EventsAndScores.SingleOrDefault(e => e.Id == eventId);
+                if (eventScores == null) return;
+
+                OrderedTeams = _standings.Teams.OrderByDescending(t => eventScores.Scores[t.Id]).ToList();
+            }
+
+
+            CurrentSortColumn = columnName;
+
+        }
+        else
+        {
+            OrderedTeams = OrderedTeams.Reverse<JMRLeague.Shared.ITeam>().ToList();
+            IsSortedAscending = !IsSortedAscending;
+        }
+    }
+
+    private string GetSortStyle(string columnName)
+    {
+        if (CurrentSortColumn != columnName)
+        {
+            return "fa-sort";
+        }
+        if (IsSortedAscending)
+        {
+            return "fa-sort-up";
+        }
+        else
+        {
+            return "fa-sort-down";
+        }
+    }
 
 }
