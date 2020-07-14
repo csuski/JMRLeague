@@ -73,6 +73,28 @@ namespace JMRLeague.Shared.Services
                     new Pick(15, 5, 6),
                 }
             },
+            new Draft
+            {
+                Id = 4, EventId = 5,
+                DraftedTeams = new List<Pick>
+                {
+                    new Pick(1, 4, 10),
+                    new Pick(2, 3, 3),
+                    new Pick(3, 2, 9),
+                    new Pick(4, 5, 12),
+                    new Pick(5, 1, 8),
+                    new Pick(6, 1, 14),
+                    new Pick(7, 5, 1),
+                    new Pick(8, 2, 5),
+                    new Pick(9, 3, 2),
+                    new Pick(10, 4, 13),
+                    new Pick(11, 4, 11),
+                    new Pick(12, 3, 4),
+                    new Pick(13, 2, 15),
+                    new Pick(14, 5, 7),
+                    new Pick(15, 1, 6),
+                }
+            },
         };
 
 

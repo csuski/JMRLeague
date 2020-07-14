@@ -106,6 +106,31 @@ namespace JMRLeague.Shared.Services
                    { 15, 5 },
                    { 16, 2 }
                },
+           },
+           new MarbleEvent {
+               Id = 5,
+               Date = new DateTime(2020, 7, 12),
+               EventNumber = 5,
+               Name = "Long Jump",
+               URL="https://www.youtube.com/watch?v=mV--hH_QxLE",
+               Scores = new Dictionary<int, int> {
+                   { 1, 20 },
+                   { 2, 2 },
+                   { 3, 25 },
+                   { 4, 3 },
+                   { 5, 6 },
+                   { 6, 0 },
+                   { 7, 15 },
+                   { 8, 5 },
+                   { 9, 8 },
+                   { 10, 4 },
+                   { 11, 10 },
+                   { 12, 1 },
+                   { 13, 12 },
+                   { 14, 9 },
+                   { 15, 8 },
+                   { 16, 11 }
+               },
            }
         };
 
