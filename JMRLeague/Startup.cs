@@ -1,3 +1,4 @@
+using JMRLeague.Shared;
 using JMRLeague.Shared.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,11 +25,12 @@ namespace JMRLeague
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<HttpClient>();
-            
-            services.AddSingleton<ITeamsService, MarbleTeamService>();
-            services.AddSingleton<IMarbleEventsService, HardcodedMarbleEventsService>();
-            services.AddSingleton<IPlayersService, HardCodedMarblePlayersService>();
-            services.AddSingleton<IDraftsService, HardCodedDraftService>();
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            services.AddTransient<ITeamsService, MarbleTeamService>();
+            services.AddTransient<IMarbleEventsService, HardcodedMarbleEventsService>();
+            services.AddTransient<IPlayersService, HardCodedMarblePlayersService>();
+            services.AddTransient<IDraftsService, HardCodedDraftService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
