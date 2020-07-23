@@ -24,11 +24,11 @@ namespace JMRLeague
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<HttpClient>();
-            // TODO: Transient? Scoped?
-            services.AddTransient<ITeamsService, HardCodedMarbleTeamsService>();
-            services.AddTransient<IMarbleEventsService, HardcodedMarbleEventsService>();
-            services.AddTransient<IPlayersService, HardCodedMarblePlayersService>();
-            services.AddTransient<IDraftsService, HardCodedDraftService>();
+            
+            services.AddSingleton<ITeamsService, MarbleTeamService>();
+            services.AddSingleton<IMarbleEventsService, HardcodedMarbleEventsService>();
+            services.AddSingleton<IPlayersService, HardCodedMarblePlayersService>();
+            services.AddSingleton<IDraftsService, HardCodedDraftService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

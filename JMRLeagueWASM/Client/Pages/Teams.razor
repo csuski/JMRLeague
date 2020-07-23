@@ -3,11 +3,17 @@
 @inject JMRLeague.Shared.Services.ITeamsService marbleTeamService
 @inject JMRLeague.Shared.Services.IMarbleEventsService marbleEventsService
 
-<StandingsComponent Title="Mable Team Standings" Standings="@Standings" />
-
+@if (Standings == null || Standings.EventsAndScores == null || Standings.EventsAndScores.Count == 0 || Standings.Teams == null || Standings.Teams.Count == 0)
+{
+<div>LOADING....</div>
+}
+else
+{
+    <StandingsComponent Title="Mable Team Standings" Standings="@Standings" />
+}
 
 @code {
-    private Standings Standings;
+private Standings Standings;
 
     protected override async Task OnInitializedAsync()
     {
@@ -20,4 +26,4 @@
             EventsAndScores = events.Events.Cast<IEventScores>().ToList()
         };
     }
-}
+    }
