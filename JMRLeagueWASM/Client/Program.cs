@@ -16,8 +16,8 @@ namespace JMRLeagueWASM.Client
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddTransient<ITeamsService, MarbleTeamService>();
-            builder.Services.AddTransient<IMarbleEventsService, HardcodedMarbleEventsService>();
-            builder.Services.AddTransient<IPlayersService, HardCodedMarblePlayersService>();
+            builder.Services.AddTransient<IMarbleEventsService, HardCodedMarbleEventsService>();
+            builder.Services.AddTransient<IPlayersService, PlayersService>();
             builder.Services.AddTransient<IDraftsService, HardCodedDraftService>();
             await builder.Build().RunAsync();
         }

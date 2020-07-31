@@ -12,10 +12,28 @@ namespace JMRLeagueWASM.Server.Data
 
         public DbSet<MarbleTeam> Teams { get; set; }
 
+        public DbSet<Player> Players { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new MarbleTeamConfiguration());
+            modelBuilder.ApplyConfiguration(new PlayersConfiguration());
+        }
+    }
+
+    public class PlayersConfiguration : IEntityTypeConfiguration<Player>
+    {
+        public void Configure(EntityTypeBuilder<Player> builder)
+        {
+            builder.HasKey(player => player.Id);
+            builder.HasData(
+                new Player { Id = 1, Name = "Chris", PlayerName = "Chris" },
+                new Player { Id = 2, Name = "Dave", PlayerName = "Dave" },
+                new Player { Id = 3, Name = "Jay", PlayerName = "Jay" },
+                new Player { Id = 4, Name = "John", PlayerName = "John" },
+                new Player { Id = 5, Name = "Tom", PlayerName = "Tom" }
+            );
         }
     }
 

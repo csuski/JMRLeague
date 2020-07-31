@@ -56,6 +56,7 @@ else
         set
         {
             _standings = value;
+            if (_standings == null) return;
             OrderedTeams = _standings.TeamsByTotal;
             CurrentSortColumn = "Total";
             IsSortedAscending = false;

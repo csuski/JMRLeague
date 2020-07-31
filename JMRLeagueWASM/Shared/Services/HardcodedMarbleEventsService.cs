@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace JMRLeague.Shared.Services
 {
-    public class HardcodedMarbleEventsService : IMarbleEventsService
+    public class HardCodedMarbleEventsService : IMarbleEventsService
     {
         List<MarbleEvent> _events = new List<MarbleEvent> {
            new MarbleEvent {

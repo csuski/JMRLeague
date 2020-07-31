@@ -28,8 +28,8 @@ namespace JMRLeague
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             services.AddTransient<ITeamsService, MarbleTeamService>();
-            services.AddTransient<IMarbleEventsService, HardcodedMarbleEventsService>();
-            services.AddTransient<IPlayersService, HardCodedMarblePlayersService>();
+            services.AddTransient<IMarbleEventsService, HardCodedMarbleEventsService>();
+            services.AddTransient<IPlayersService, PlayersService>();
             services.AddTransient<IDraftsService, HardCodedDraftService>();
         }
 
