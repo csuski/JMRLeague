@@ -1,0 +1,71 @@
+﻿@page "/AddEditEvent"
+@page "/AddEditEvent/{EventId:int}"
+@using JMRLeague.Shared
+@inject JMRLeague.Shared.Services.ITeamsService marbleTeamService
+@inject JMRLeague.Shared.Services.IMarbleEventsService marbleEventsService
+
+<h3>Add Event</h3>
+
+<EditForm Model="@MarbleEvent" OnValidSubmit="@Submit">
+    <label for="name">Name</label>
+    <InputText id="name" @bind-Value="@MarbleEvent.Name" class="form-control" />
+    <label for="date">Date</label>
+    <InputDate id="date" @bind-Value="@MarbleEvent.Date" class="form-control" />
+    <InputText @bind-Value="@MarbleEvent.URL" class="form-control" />
+
+    @if (MarbleEvent.Scores != null)
+    {
+        @foreach(var scoreData in MarbleEvent.Scores)
+        {
+            <label for="@scoreData.TeamName">@scoreData.TeamName</label>
+            <InputNumber TValue="int" id="@scoreData.TeamName" class="form-control" @bind-Value="@scoreData.Score" />
+        }
+    }
+
+
+
+
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</EditForm>
+
+
+
+
+@code {
+    [Parameter]
+    public int EventId { get; set; } = 0;
+    public EventCallback Submit { get; set; }
+    public MarbleEventDataEntry MarbleEvent { get; set; }
+    public MarbleTeams MarbleTeams { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MarbleEvent = new MarbleEventDataEntry();
+        MarbleTeams = await marbleTeamService.GetTeams();
+        MarbleEvent.Scores = new ScoreData[MarbleTeams.Teams.Count()];
+        for (int i = 0; i < MarbleTeams.Teams.Count(); i++)
+        {
+            MarbleEvent.Scores[i] = new ScoreData
+            {
+                TeamId = MarbleTeams.Teams[i].Id,
+                TeamName = MarbleTeams.Teams[i].Name
+            };
+        }
+    }
+
+    public class MarbleEventDataEntry
+    {
+        public string Name;
+        public string URL;
+        public DateTime Date;
+        public ScoreData[] Scores;
+    }
+
+    public class ScoreData
+    {
+        public int TeamId;
+        public string TeamName;
+        public int Score;
+    }
+}

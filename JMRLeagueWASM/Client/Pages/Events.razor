@@ -1,0 +1,52 @@
+﻿@page "/events"
+@page "/events/{EventId:int}"
+@using JMRLeague.Shared
+@inject JMRLeague.Shared.Services.IMarbleEventsService eventsService
+
+<h3>Events</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var marbleEvent in MarbleEvents.Events)
+        {
+            <tr>
+                <td><a href="/events/@marbleEvent.Id">@marbleEvent.EventNumber</a></td>
+                <td>@marbleEvent.Name</td>
+                <td>@marbleEvent.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/addeditevent">Add</a>
+
+
+@if (EventId > 0 && MarbleEvents != null)
+{
+<div>
+    <div>@MarbleEvents.GetEvent(EventId).Name</div>
+    <div>@MarbleEvents.GetEvent(EventId).URL</div>
+    <div>@MarbleEvents.GetEvent(EventId).Date</div>
+    <div><a href="/addeditevent/@EventId">Edit</a></div>
+</div>
+
+}
+
+@code {
+
+
+    [Parameter]
+    public int EventId { get; set; } = 0;
+
+    protected MarbleEvents MarbleEvents { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MarbleEvents = await eventsService.GetMarbleEvents();
+    }
+}
