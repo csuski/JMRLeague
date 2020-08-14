@@ -8,7 +8,7 @@ The most insteresting items in this project is that it can be setup to have the 
 
 # WASM + Server in same project
 
-Follow instructiosn from [Blazor Train](https://www.youtube.com/watch?v=SkYQDPXw__c&feature=youtu.be)
+Follow instructions from [Blazor Train](https://www.youtube.com/watch?v=SkYQDPXw__c&feature=youtu.be)
   * Create new Blazor Server Project
   * Add ASP host Blazor Wasm Project
   * Project reference Blazor Server to WASM Client & Shared
