@@ -8,17 +8,18 @@
 
 <EditForm Model="@MarbleEvent" OnValidSubmit="@Submit">
     <label for="name">Name</label>
-    <InputText id="name" @bind-Value="@MarbleEvent.Name" class="form-control" />
+    <InputText id="name" @bind-Value="@MarbleEvent.Name" class="form-control-sm" /><div />
     <label for="date">Date</label>
-    <InputDate id="date" @bind-Value="@MarbleEvent.Date" class="form-control" />
-    <InputText @bind-Value="@MarbleEvent.URL" class="form-control" />
+    <InputDate id="date" @bind-Value="@MarbleEvent.Date" class="form-control-sm" /><div />
+    <label for="url">URL</label>
+    <InputText id="url" @bind-Value="@MarbleEvent.URL" class="form-control-sm" /><div />
 
     @if (MarbleEvent.Scores != null)
     {
-        @foreach(var scoreData in MarbleEvent.Scores)
+        @foreach (var scoreData in MarbleEvent.Scores)
         {
             <label for="@scoreData.TeamName">@scoreData.TeamName</label>
-            <InputNumber TValue="int" id="@scoreData.TeamName" class="form-control" @bind-Value="@scoreData.Score" />
+            <InputNumber TValue="int" id="@scoreData.TeamName" class="form-control-sm" @bind-Value="@scoreData.Score" /><div />
         }
     }
 
