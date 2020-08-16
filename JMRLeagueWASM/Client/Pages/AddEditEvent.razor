@@ -1,29 +1,51 @@
 ﻿@page "/AddEditEvent"
 @page "/AddEditEvent/{EventId:int}"
 @using JMRLeague.Shared
+@using System.ComponentModel.DataAnnotations
 @inject JMRLeague.Shared.Services.ITeamsService marbleTeamService
 @inject JMRLeague.Shared.Services.IMarbleEventsService marbleEventsService
 
 <h3>Add Event</h3>
 
-<EditForm Model="@MarbleEvent" OnValidSubmit="@Submit">
-    <label for="name">Name</label>
-    <InputText id="name" @bind-Value="@MarbleEvent.Name" class="form-control-sm" /><div />
-    <label for="date">Date</label>
-    <InputDate id="date" @bind-Value="@MarbleEvent.Date" class="form-control-sm" /><div />
-    <label for="url">URL</label>
-    <InputText id="url" @bind-Value="@MarbleEvent.URL" class="form-control-sm" /><div />
 
-    @if (MarbleEvent.Scores != null)
-    {
-        @foreach (var scoreData in MarbleEvent.Scores)
+<EditForm Model="@MarbleEvent" OnSubmit="HandleSubmit">
+    <table class="table">
+        <tr>
+        <td><label for="name">Name</label></td>
+        <td><InputText id="name" @bind-Value="MarbleEvent.Name" class="form-control-sm" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="date">Date</label>
+            </td>
+            <td>
+                <InputDate id="date" @bind-Value="MarbleEvent.Date" class="form-control-sm" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="url">URL</label>
+            </td>
+            <td><InputText id="url" @bind-Value="MarbleEvent.URL" class="form-control-sm" /></td>
+        </tr>
+
+
+        @if (MarbleEvent.Scores != null)
         {
-            <label for="@scoreData.TeamName">@scoreData.TeamName</label>
-            <InputNumber TValue="int" id="@scoreData.TeamName" class="form-control-sm" @bind-Value="@scoreData.Score" /><div />
+            @foreach (var scoreData in MarbleEvent.Scores)
+            {
+                <tr>
+                    <td>
+                        <label for="@scoreData.TeamName">@scoreData.TeamName</label>
+                    </td>
+                    <td>
+                        <InputNumber TValue="int" id="@scoreData.TeamName" class="form-control-sm" @bind-Value="scoreData.Score" />
+                    </td>
+                </tr>
+            }
         }
-    }
 
-
+    </table>
 
 
 
@@ -36,15 +58,21 @@
 @code {
     [Parameter]
     public int EventId { get; set; } = 0;
-    public EventCallback Submit { get; set; }
-    public MarbleEventDataEntry MarbleEvent { get; set; }
+
+    public MarbleEventDataEntry MarbleEvent { get; set; } = new MarbleEventDataEntry
+    {
+        Date = DateTime.Today
+    };
+
+
     public MarbleTeams MarbleTeams { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
-        MarbleEvent = new MarbleEventDataEntry();
         MarbleTeams = await marbleTeamService.GetTeams();
         MarbleEvent.Scores = new ScoreData[MarbleTeams.Teams.Count()];
+
         for (int i = 0; i < MarbleTeams.Teams.Count(); i++)
         {
             MarbleEvent.Scores[i] = new ScoreData
@@ -53,6 +81,11 @@
                 TeamName = MarbleTeams.Teams[i].Name
             };
         }
+    }
+
+    private async Task HandleSubmit()
+    {
+        Console.WriteLine("Handle Submit");
     }
 
     public class MarbleEventDataEntry
