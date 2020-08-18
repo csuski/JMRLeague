@@ -3,11 +3,26 @@
 @inject JMRLeague.Shared.Services.IPlayersService playerService
 @inject JMRLeague.Shared.Services.IMarbleEventsService eventsService
 @inject JMRLeague.Shared.Services.IDraftsService draftService
+@inject IJSRuntime JSRuntime
+
+
+<button @onclick=ButtonClicked>Perform interop</button>
 
 <StandingsComponent Title="League Standings" Standings="@Standings" />
 
 
 @code {
+
+    @code
+{
+        private async Task ButtonClicked()
+        {
+            // Must be a Javascript function scoped to 'Window' we are calling:
+            // window.Alert("Hello World")
+            await JSRuntime.InvokeVoidAsync("alert", "Hello world");
+        }
+    }
+
     private Standings Standings;
 
     protected override async Task OnInitializedAsync()
@@ -18,13 +33,14 @@
 
 
         var scores = new List<PlayerScores>();
-        foreach(var e in eventList.Events)
+        foreach (var e in eventList.Events)
         {
             var draft = drafts.DraftList.SingleOrDefault(d => d.EventId == e.Id);
             if (draft == null) continue;
             scores.Add(new PlayerScores(players, draft, e)
             {
-                Name = e.Name, Id = e.Id
+                Name = e.Name,
+                Id = e.Id
             });
         }
 
