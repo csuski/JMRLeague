@@ -19,6 +19,7 @@ namespace JMRLeagueWASM.Server.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new MarbleTeamConfiguration());
             modelBuilder.ApplyConfiguration(new PlayersConfiguration());
+            
         }
     }
 

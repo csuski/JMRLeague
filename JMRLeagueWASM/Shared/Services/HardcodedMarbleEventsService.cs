@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace JMRLeague.Shared.Services
 {
@@ -134,7 +135,16 @@ namespace JMRLeague.Shared.Services
            }
         };
 
-
         public Task<MarbleEvents> GetMarbleEvents() => Task.FromResult(new MarbleEvents { Events = _events });
+
+        public async Task AddEvent(MarbleEvent marbleEvent)
+        {
+            if(marbleEvent.Id < 0)
+            {
+                marbleEvent.Id = _events.Max(i => i.Id) + 1;
+            }
+            _events.Add(marbleEvent);
+            await Task.CompletedTask;
+        }
     }
 }

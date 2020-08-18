@@ -11,8 +11,13 @@
 <EditForm Model="@MarbleEvent" OnSubmit="HandleSubmit">
     <table class="table">
         <tr>
-        <td><label for="name">Name</label></td>
-        <td><InputText id="name" @bind-Value="MarbleEvent.Name" class="form-control-sm" /></td>
+            <td><label for="name">Name</label></td>
+            <td><InputText id="name" @bind-Value="MarbleEvent.Name" class="form-control-sm" /></td>
+        </tr>
+        <tr>
+            <td><label for="eNum">EventNumber</label></td>
+
+            <td><InputNumber TValue="int" id="eNum" class="form-control-sm" @bind-Value="MarbleEvent.EventNumber" /></td>
         </tr>
         <tr>
             <td>
@@ -85,12 +90,26 @@
 
     private async Task HandleSubmit()
     {
-        Console.WriteLine("Handle Submit");
+        // validation !!
+
+        var newMarbleEvent = new MarbleEvent
+        {
+            Id = -1, EventNumber = MarbleEvent.EventNumber, Date = MarbleEvent.Date, Name = MarbleEvent.Name,
+            URL = MarbleEvent.Name,
+            Scores = new Dictionary<int, int>()
+        };
+
+        foreach(var score in MarbleEvent.Scores)
+        {
+            newMarbleEvent.Scores.Add(score.TeamId, score.Score);
+        }
+        await marbleEventsService.AddEvent(newMarbleEvent);
     }
 
     public class MarbleEventDataEntry
     {
         public string Name;
+        public int EventNumber;
         public string URL;
         public DateTime Date;
         public ScoreData[] Scores;

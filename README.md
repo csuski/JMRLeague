@@ -25,6 +25,15 @@ This works for local host, but if you hard code the API into the service you can
 * For Blazor Server AppSettings is configured in ConfigureServices and the property can be setup in Azure (or wherever it is deployed) to point to the WASM Server.
 * Now there is one API, one host, one database to support both types of Blazor
 
+# Examples To Show
+
+* Creating Components that can be used multiple times (Standings.cs)
+* Dependency Injection with services (Shared/Services/*.cs & Startup.cs & Program.cs)
+* Sorting without JavaScript (Standings.cs)
+* Routing / Routing with ID (Events.razor)
+* Javascript interopt (Charts) **TODO**
+* Edit Form **In Progress**
+
 
 # Resources
 * [Blazor Train](https://blazortrain.com/)

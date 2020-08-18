@@ -28,9 +28,10 @@ namespace JMRLeague
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             services.AddTransient<ITeamsService, MarbleTeamService>();
-            services.AddTransient<IMarbleEventsService, HardCodedMarbleEventsService>();
             services.AddTransient<IPlayersService, PlayersService>();
-            services.AddTransient<IDraftsService, HardCodedDraftService>();
+            services.AddSingleton<IDraftsService, HardCodedDraftService>();
+            // We can use this + the add event page to see the different between Scoped, Singleton and Transient lifetimes.
+            services.AddSingleton<IMarbleEventsService, HardCodedMarbleEventsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
