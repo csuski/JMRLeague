@@ -39,3 +39,11 @@ This works for local host, but if you hard code the API into the service you can
 * [Blazor Train](https://blazortrain.com/)
 * [Nick Chapsas - Blazor Fundamentals](https://www.youtube.com/playlist?list=PLUOequmGnXxPrY79JGnF72e1Pba8z93zo)
 * [Microsoft Blazor: Building Web Applications in .NET 2nd Edition by Peter Himschoot](https://amzn.to/3eUYGJf)
+
+# Issues with Blazor
+
+Some issue I have run into working with Blazor
+
+* If you create a Blazor Server application, then create a Blazor WASM application you will not get the correct settings.  To fix this, toggle the .Net Core selection back and forth between 3.0 and 3.1.  Then you should get the proper settings for Blazor WASM
+* Sometimes there will be a lot of errors in the error log that shouldn't be there. The application will still run, but the errors will be listed.  To fix this restart Visual Studio
+* Sometimes there will be a lot of errors in the error log that shouldn't be there. The application will _not_ run.  In this case restarting Visual Studio will not fix it you will need to delete the \obj and \bin folders of the project(s) having issues.
