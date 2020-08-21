@@ -1,5 +1,5 @@
 # JMRLeague
-This is an exampl project for NM .Net User group.
+This is an example project for NM .Net User group.
 
 This project is an example of setting up a Blazor Server app and Blazor WASM app for a Marble Fantasy League.
 
