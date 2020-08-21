@@ -12,7 +12,7 @@ Follow instructions from [Blazor Train](https://www.youtube.com/watch?v=SkYQDPXw
   * Create new Blazor Server Project
   * Add ASP host Blazor Wasm Project
   * Project reference Blazor Server to WASM Client & Shared
-  * Blazor Server _Hosts.cshtml change to client app component, turn off prerender (ServerMode="Server")
+  * Blazor Server \_Hosts.cshtml change to client app component, turn off prerender (ServerMode="Server")
   * Setup multiple startup projects (Blazor Server & WASM Server)
   * Inject HTTP Client into Blazor Server (Startup.cs > ConfigureServices)
   * Point Blazors Server to Blazor WASM Server API (full path in FetchData)
@@ -31,7 +31,7 @@ This works for local host, but if you hard code the API into the service you can
 * Dependency Injection with services (Shared/Services/*.cs & Startup.cs & Program.cs)
 * Sorting without JavaScript (Standings.cs)
 * Routing / Routing with ID (Events.razor)
-* Javascript interopt (Charts) **TODO**
+* Javascript interopt (Charts) **On Chart JS branch**
 * Edit Form **In Progress**
 
 
